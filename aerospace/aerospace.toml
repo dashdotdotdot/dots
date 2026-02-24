@@ -1,0 +1,218 @@
+
+start-at-login = true
+after-login-command = []
+after-startup-command = [
+  'exec-and-forget borders active_color=0xffff8b8b inactive_color=0xffa76f6f width=5.0 hidpi=on'
+]
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE'
+]
+key-mapping.preset = 'qwerty'
+
+# // Disable fullscreen transition animations
+#full-screen-api.transition-duration.enter = 0
+#full-screen-api.transition-duration.leave = 0
+
+# // add dragging
+# defaults write -g NSWindowShouldDragOnGesture -bool true
+
+# // disable window animations
+# defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'horizontal'
+
+#automatically-unhide-macos-hidden-apps = true
+
+[gaps]
+outer.top =        5
+outer.bottom =     10
+outer.left =       10 #80
+outer.right =      10
+inner.horizontal = 10
+inner.vertical =   10
+
+
+# --- Auto-assign Helium profiles to workspaces ---
+
+# CS profile → workspace 1
+[[on-window-detected]]
+if.app-id = "net.imput.helium"
+if.window-title-regex-substring = "(?i)cs"
+run = ["move-node-to-workspace 1"]
+
+# Math profile → workspace 2
+[[on-window-detected]]
+if.app-id = "net.imput.helium"
+if.window-title-regex-substring = "(?i)math"
+run = ["move-node-to-workspace 2"]
+
+# German profile → workspace 3
+[[on-window-detected]]
+if.app-id = "net.imput.helium"
+if.window-title-regex-substring = "(?i)german"
+run = ["move-node-to-workspace 3"]
+
+# Personal profile → workspace 5
+[[on-window-detected]]
+if.app-id = "net.imput.helium"
+if.window-title-regex-substring = "(?i)personal"
+run = ["move-node-to-workspace 4"]
+
+[[on-window-detected]]
+if.app-id = "com.apple.mail"
+run = ["move-node-to-workspace 5"]
+
+[[on-window-detected]]
+if.app-id = "com.apple.iCal"
+run = ["move-node-to-workspace 6"]
+
+# --- Move specific Obsidian windows to workspaces based on title ---
+
+[[on-window-detected]]
+if.app-id = "md.obsidian"
+if.window-title-regex-substring = "(?i)cs"
+run = ["move-node-to-workspace 1"]
+
+[[on-window-detected]]
+if.app-id = "md.obsidian"
+if.window-title-regex-substring = "(?i)math"
+run = ["move-node-to-workspace 2"]
+
+[[on-window-detected]]
+if.app-id = "md.obsidian"
+if.window-title-regex-substring = "(?i)german"
+run = ["move-node-to-workspace 3"]
+
+# ADD ANY APP BELOW TO KEEP FLOATING
+#osascript -e 'id of app "Zen Browser"'
+[[on-window-detected]]
+if.app-id = "com.IdeaPunch.ColorSlurp"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Passwords"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "ModrinthApp"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.overwolf.curseforge"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Music"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = 'net.imput.helium'
+check-further-callbacks = true
+if.window-title-regex-substring = 'iCloud Passwords'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = "com.apple.reminders"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "net.imput.helium.app.eikjhbkpemdappjfcmdeeeamdpkgabmk"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.finder"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.audio.AudioMIDISetup"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.airport.airportutility"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.keychainaccess"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Preview"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Notes"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Photos"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.QuickTimePlayerX"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.ActivityMonitor"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "net.whatsapp.WhatsApp"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-name-regex-substring = "finder"
+run = "layout floating"
+
+[mode.main.binding]
+
+    cmd-alt-h = [] # Disable "hide others"
+    cmd-h = [] # Disable "hide application"
+
+    #layout switcher
+    ctrl-alt-cmd-semicolon = 'layout floating tiling'
+
+    #moving alignment
+    ctrl-alt-cmd-h = 'focus left'
+    ctrl-alt-cmd-j = 'focus down'
+    ctrl-alt-cmd-k = 'focus up'
+    ctrl-alt-cmd-l = 'focus right'
+
+    #focus
+    ctrl-alt-cmd-shift-h = 'move left'
+    ctrl-alt-cmd-shift-j = 'move down'
+    ctrl-alt-cmd-shift-k = 'move up'
+    ctrl-alt-cmd-shift-l = 'move right'
+
+    #resizing
+    ctrl-alt-cmd-minus = 'resize smart -50'
+    ctrl-alt-cmd-equal = 'resize smart +50'
+    ctrl-alt-cmd-f = 'fullscreen'
+    ctrl-alt-cmd-shift-f = 'macos-native-fullscreen'
+
+    #the super cool term thing
+    ctrl-alt-cmd-y = 'join-with right'
+
+    # ctrl-alt-cmd-shift-" = 'layout floating tiling' # 'floating toggle' in i3
+    # (doesnt work idk)
+
+    ctrl-alt-cmd-1 = 'workspace 1'
+    ctrl-alt-cmd-2 = 'workspace 2'
+    ctrl-alt-cmd-3 = 'workspace 3'
+    ctrl-alt-cmd-4 = 'workspace 4'
+    ctrl-alt-cmd-5 = 'workspace 5'
+    ctrl-alt-cmd-6 = 'workspace 6'
+
+    ctrl-alt-cmd-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
+    ctrl-alt-cmd-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
+    ctrl-alt-cmd-shift-3 = 'move-node-to-workspace 3 --focus-follows-window'
+    ctrl-alt-cmd-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
+    ctrl-alt-cmd-shift-5 = 'move-node-to-workspace 5 --focus-follows-window'
+    ctrl-alt-cmd-shift-6 = 'move-node-to-workspace 6 --focus-follows-window'
+
+    ctrl-alt-cmd-shift-c = 'reload-config'
